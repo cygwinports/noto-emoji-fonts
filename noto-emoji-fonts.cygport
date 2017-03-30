@@ -1,0 +1,40 @@
+inherit font
+
+NAME="noto-emoji-fonts"
+VERSION=20170322
+RELEASE=1
+CATEGORY="X11"
+SUMMARY="Noto emoji fonts"
+DESCRIPTION="Noto's goal is to provide a beautiful reading experience for
+everyone and for all languages. Currently, Noto covers all major languages of
+the world and many others, including European, African, Middle Eastern, Indic,
+South and Southeast Asian, Central Asian, American, and East Asian languages.
+Several minority and historical languages are also supported."
+HOMEPAGE="http://www.google.com/get/noto"
+commit0=0e73244b3f4b9dc5d4e68824c91e7774f2f1d35d
+commit1=b2fb70587d2ca3beee0a9e21ac633e55437a8dc3
+SRC_URI="
+	https://github.com/googlei18n/noto-emoji/archive/${commit0}/noto-emoji-${commit0}.tar.gz
+	https://github.com/googlei18n/nototools/archive/${commit1}/nototools-${commit1}.tar.gz
+"
+SRC_DIR="noto-emoji-${commit0}"
+PATCH_URI="http://pkgs.fedoraproject.org/cgit/rpms/google-noto-emoji-fonts.git/plain/noto-emoji-use-system-pngquant.patch"
+
+ARCH=noarch
+
+src_compile() {
+	:
+#	lndirs
+#	cd ${B}
+#	LANG=zh_CN.UTF-8 \
+#	PATH="${S}/../nototools-${commit1}/nototools:${PATH}" \
+#	PYTHONPATH="${S}/../nototools-${commit1}" \
+#	cygmake OPT_CFLAGS="${CFLAGS}"
+}
+
+src_install() {
+	cd ${S}
+	fontinto noto
+	dofont fonts/*.ttf
+	dodoc fonts/LICENSE
+}
